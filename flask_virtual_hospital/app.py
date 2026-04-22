@@ -172,4 +172,6 @@ def analyze_api() -> str:
 
 
 if __name__ == "__main__":
-    app.run(debug=False, use_reloader=False)
+    host = os.getenv("FLASK_HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", os.getenv("FLASK_PORT", "5000")))
+    app.run(host=host, port=port, debug=False, use_reloader=False)
