@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Virtual Hospital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <p class="badge">Virtual Intake Assistant</p>
+            <h1>AI-Powered Virtual Hospital Triage</h1>
+            <p class="hero-subtitle">Capture symptoms, scan report findings, and generate a structured preliminary clinical note in one flow.</p>
+        </header>
+
+        <main>
+            <section id="input-section" class="section">
+                <h2>Patient Information & Symptoms</h2>
+                <form id="triage-form">
+                    <fieldset>
+                        <legend>Demographics</legend>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="age">Age (years):</label>
+                                <input type="number" id="age" name="age" value="34" min="0" max="150" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="sex">Sex:</label>
+                                <select id="sex" name="sex" required>
+                                    <option value="Female">Female</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City (for nearby specialist directory):</label>
+                            <input type="text" id="city" name="city" value="Delhi" placeholder="e.g., Delhi, Mumbai, Bengaluru">
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Symptom Presentation</legend>
+                        <div class="form-group">
+                            <label for="symptoms">Symptoms (describe):</label>
+                            <small>You can type in English, Hindi/Hinglish, or other common languages.</small>
+                            <textarea id="symptoms" name="symptoms" rows="4" placeholder="e.g., Fever, cough, sore throat, fatigue" required>Fever, cough, and fatigue with mild body aches.</textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="duration">Duration:</label>
+                                <input type="text" id="duration" name="duration" value="3 days" placeholder="e.g., 3 days, 1 week" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="severity">Severity:</label>
+                                <select id="severity" name="severity" required>
+                                    <option value="Mild">Mild</option>
+                                    <option value="Moderate" selected>Moderate</option>
+                                    <option value="Severe">Severe</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Lab/Medical Report</legend>
+                        <div class="form-group">
+                            <label for="report_title">Report Title:</label>
+                            <input type="text" id="report_title" name="report_title" value="Lab summary" placeholder="e.g., Lab summary, ECG, Chest X-ray">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="report_text">Report Text/Values:</label>
+                            <small>Multilingual text is supported when possible; include numeric values for best accuracy.</small>
+                            <textarea id="report_text" name="report_text" rows="4" placeholder="e.g., Hemoglobin 11.5, LDL 180, glucose 115">Hemoglobin slightly low. LDL cholesterol elevated. Glucose at the upper limit of normal.</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="report_file">Upload Report File (PDF, JPG, PNG, CSV, TXT):</label>
+                            <input type="file" id="report_file" name="report_file" accept=".pdf,.jpg,.jpeg,.png,.csv,.txt,.json">
+                        </div>
+                    </fieldset>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Analyze Presentation</button>
+                        <button type="reset" class="btn btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+            </section>
+
+            <section id="status-section" class="section" style="display: none;">
+                <p id="status-message" class="status-info"></p>
+            </section>
+
+            <section id="results-section" class="section" style="display: none;">
+                <h2>Analysis Results</h2>
+
+                <div id="source-mode" class="info-banner"></div>
+
+                <div id="triage-dashboard" class="triage-dashboard"></div>
+
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Symptom Analysis</h3>
+                        <div id="symptom-results"></div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Report Analysis</h3>
+                        <div id="report-results"></div>
+                    </div>
+                </div>
+
+                <div class="result-card full-width">
+                    <h3>Clinical Note</h3>
+                    <div id="clinical-note" class="clinical-note"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button onclick="document.getElementById('input-section').scrollIntoView({ behavior: 'smooth' })" class="btn btn-primary">New Analysis</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p><strong>Disclaimer:</strong> This is an AI/ML-assisted preliminary triage tool. All findings require clinician review before any clinical decision. Do not delay urgent care based on this output.</p>
+        </footer>
+    </div>
+
+    <script>
+        const form = document.getElementById('triage-form');
+        const statusSection = document.getElementById('status-section');
+        const resultsSection = document.getElementById('results-section');
+        const statusMessage = document.getElementById('status-message');
+        const inputSection = document.getElementById('input-section');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Analyzing...';
+
+            // Show loading state
+            statusSection.style.display = 'block';
+            resultsSection.style.display = 'none';
+            statusMessage.textContent = '⏳ Analyzing...';
+            statusMessage.className = 'status-info';
+
+            try {
+                // Prepare form data
+                const formData = new FormData(form);
+
+                // Send to API
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Update status
+                    statusMessage.textContent = '✅ ' + data.status;
+                    statusMessage.className = 'status-success';
+
+                    // Display results
+                    displayResults(data);
+                    resultsSection.style.display = 'block';
+
+                    // Scroll to results
+                    setTimeout(() => {
+                        resultsSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 300);
+                } else {
+                    throw new Error(data.error || 'Analysis failed');
+                }
+            } catch (error) {
+                statusMessage.textContent = '❌ Error: ' + error.message;
+                statusMessage.className = 'status-error';
+                console.error('Error:', error);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Analyze Presentation';
+            }
+        });
+
+        function displayResults(data) {
+            // Source mode
+            document.getElementById('source-mode').innerHTML = 
+                `<strong>Mode:</strong> ${data.source_mode}`;
+
+            const dashboard = data.triage_dashboard || {};
+            const overallScore = dashboard.overallScore || 0;
+            const symptomScore = dashboard.symptomScore || 0;
+            const reportScore = dashboard.reportScore || 0;
+            const severityScore = dashboard.severityScore || 0;
+            const outputLanguage = dashboard.outputLanguage || 'en';
+
+            document.getElementById('triage-dashboard').innerHTML = `
+                <div class="triage-card triage-primary">
+                    <p class="triage-label">Overall Triage Score</p>
+                    <p class="triage-value">${overallScore}<span>/100</span></p>
+                    <p class="triage-band">Band: ${(dashboard.overallBand || 'priority').toUpperCase()}</p>
+                    <div class="score-track"><div class="score-fill" style="width:${overallScore}%"></div></div>
+                </div>
+                <div class="triage-card">
+                    <p class="triage-label">Symptom Score</p>
+                    <p class="triage-value">${symptomScore}<span>/100</span></p>
+                    <div class="score-track"><div class="score-fill" style="width:${symptomScore}%"></div></div>
+                </div>
+                <div class="triage-card">
+                    <p class="triage-label">Report Score</p>
+                    <p class="triage-value">${reportScore}<span>/100</span></p>
+                    <div class="score-track"><div class="score-fill" style="width:${reportScore}%"></div></div>
+                </div>
+                <div class="triage-card">
+                    <p class="triage-label">Input Severity Score</p>
+                    <p class="triage-value">${severityScore}<span>/100</span></p>
+                    <p class="triage-meta">Detected language: ${String(outputLanguage).toUpperCase()}</p>
+                </div>
+            `;
+
+            function directoryHtml(directory) {
+                if (!directory || directory.length === 0) {
+                    return '<p>No city directory suggestions available.</p>';
+                }
+                return `
+                    <div class="directory-grid">
+                        ${directory.map(item => `
+                            <div class="directory-item">
+                                <p><strong>${item.specialty}</strong></p>
+                                <p>${item.department}</p>
+                                <p>${item.city} | ${item.facilityType}</p>
+                                <p>Visit: ${item.visitWindow}</p>
+                                <p>Priority: ${item.priority}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            // Symptom results
+            const symptomResults = data.symptom_result;
+            document.getElementById('symptom-results').innerHTML = `
+                <p><strong>Risk Level:</strong> <span class="risk-${symptomResults.riskLevel.toLowerCase()}">${symptomResults.riskLevel.toUpperCase()}</span></p>
+                <p><strong>Summary:</strong> ${symptomResults.summary}</p>
+                <p><strong>Recommended Specialist:</strong> ${symptomResults.specialistToConsult || 'General Physician (Internal Medicine)'}</p>
+                <p><strong>Triage Score:</strong> ${symptomResults.triageScore || 0}/100 (${String(symptomResults.triageBand || 'priority').toUpperCase()})</p>
+                <h4>Possibilities:</h4>
+                ${symptomResults.possibilities.map(p => `
+                    <div class="possibility">
+                        <strong>${p.disease}</strong> (${(p.confidence * 100).toFixed(1)}%)
+                        <p>${p.reason}</p>
+                    </div>
+                `).join('')}
+                <h4>Recommended Tests:</h4>
+                <ul>${symptomResults.recommendedTests.map(t => `<li>${t}</li>`).join('')}</ul>
+                <h4>Precautions:</h4>
+                <ul>${(symptomResults.precautions || []).map(p => `<li>${p}</li>`).join('')}</ul>
+                <h4>City/Specialty Directory:</h4>
+                ${directoryHtml(symptomResults.doctorDirectory)}
+            `;
+
+            // Report results
+            const reportResults = data.report_result;
+            document.getElementById('report-results').innerHTML = `
+                <p><strong>Risk Level:</strong> <span class="risk-${reportResults.riskLevel.toLowerCase()}">${reportResults.riskLevel.toUpperCase()}</span></p>
+                <p><strong>Summary:</strong> ${reportResults.summary}</p>
+                <p><strong>Recommended Specialist:</strong> ${reportResults.specialistToConsult || 'General Physician (Internal Medicine)'}</p>
+                <p><strong>Triage Score:</strong> ${reportResults.triageScore || 0}/100 (${String(reportResults.triageBand || 'priority').toUpperCase()})</p>
+                <h4>Findings:</h4>
+                ${reportResults.possibilities.map(p => `
+                    <div class="possibility">
+                        <strong>${p.disease}</strong> (${(p.confidence * 100).toFixed(1)}%)
+                        <p>${p.reason}</p>
+                    </div>
+                `).join('')}
+                <h4>Precautions:</h4>
+                <ul>${(reportResults.precautions || []).map(p => `<li>${p}</li>`).join('')}</ul>
+                <h4>City/Specialty Directory:</h4>
+                ${directoryHtml(reportResults.doctorDirectory)}
+            `;
+
+            // Clinical note
+            document.getElementById('clinical-note').textContent = data.clinical_note;
+        }
+    </script>
+</body>
+</html>
