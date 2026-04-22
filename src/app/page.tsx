@@ -104,6 +104,7 @@ const ResultBlock = memo(function ResultBlock({ title, result }: { title: string
 });
 
 export default function Home() {
+  const buildLabel = 'GitHub deploy ready';
   const [symptoms, setSymptoms] = useState(initialSymptoms);
   const [report, setReport] = useState(initialReport);
   const [reportAttachment, setReportAttachment] = useState<ReportAttachment>({
@@ -285,6 +286,7 @@ export default function Home() {
               structured medical summary. The current logic is rule-based and ready to be replaced
               with real ML and NLP services.
             </p>
+            <p className="deployment-stamp">Deployment status: {buildLabel} on Render from the GitHub repo root.</p>
             <div className="hero-grid">
               <div className="stat-card">
                 <p className="stat-label">Symptom analysis</p>
