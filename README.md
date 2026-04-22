@@ -43,6 +43,15 @@ Notes:
 - `npm run start` - Run the production build.
 - `npm run lint` - Run ESLint checks.
 
+## Render Deployment
+
+This repo contains two separate apps:
+
+- The root Next.js app, which is the current public UI.
+- `flask_virtual_hospital/`, which is a separate legacy Flask implementation.
+
+If you deploy the site from Render, point the service at the repository root so Render builds and starts the Next.js app. Deploying the Flask subfolder will show the older Flask page instead of the current UI.
+
 ## API Endpoints
 
 - `POST /api/analyze-symptoms`
