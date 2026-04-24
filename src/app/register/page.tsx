@@ -4,42 +4,74 @@ import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [status, setStatus] = useState('Enter your credentials to continue.');
-  const [error, setError] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [status, setStatus] = useState('Create your account to get started.');
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  function validateForm() {
+    const newErrors: Record<string, string> = {};
+
+    if (!name.trim()) {
+      newErrors.name = 'Name is required.';
+    }
+
+    if (!email.trim()) {
+      newErrors.email = 'Email is required.';
+    } else if (!email.includes('@')) {
+      newErrors.email = 'Please enter a valid email.';
+    }
+
+    if (!password) {
+      newErrors.password = 'Password is required.';
+    } else if (password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters.';
+    }
+
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setError('');
+
+    if (!validateForm()) {
+      setStatus('Please fix the errors above.');
+      return;
+    }
+
     setLoading(true);
-    setStatus('Signing in...');
+    setStatus('Creating your account...');
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ name: name.trim(), email, password })
       });
 
       const data = (await response.json()) as { error?: string };
       if (!response.ok) {
-        setError(data.error ?? 'Login failed.');
-        setStatus('');
+        setStatus(data.error ?? 'Registration failed.');
         return;
       }
 
-      setStatus('Welcome! Redirecting...');
+      setStatus('Account created! Redirecting...');
       setTimeout(() => {
         router.push('/dashboard');
         router.refresh();
-      }, 800);
+      }, 1000);
     } catch {
-      setError('Network error while logging in.');
-      setStatus('');
+      setStatus('Network error while creating account.');
     } finally {
       setLoading(false);
     }
@@ -56,11 +88,28 @@ export default function LoginPage() {
         <div className="auth-form-card">
           <div className="auth-form-content">
             <div className="auth-form-header">
-              <h1>Welcome Back</h1>
-              <p>Sign in to continue to your virtual hospital dashboard</p>
+              <h1>Create Account</h1>
+              <p>Join our virtual hospital for better healthcare management</p>
             </div>
 
             <form onSubmit={onSubmit} className="auth-form">
+              {/* Name field */}
+              <div className="form-group">
+                <label htmlFor="name" className="form-label">Full Name</label>
+                <div className="form-input-wrapper">
+                  <input
+                    id="name"
+                    type="text"
+                    placeholder="John Doe"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className={`form-input ${errors.name ? 'error' : ''}`}
+                  />
+                  <div className="input-icon">👤</div>
+                </div>
+                {errors.name && <span className="form-error">{errors.name}</span>}
+              </div>
+
               {/* Email field */}
               <div className="form-group">
                 <label htmlFor="email" className="form-label">Email Address</label>
@@ -69,45 +118,52 @@ export default function LoginPage() {
                     id="email"
                     type="email"
                     placeholder="you@example.com"
-                    required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className={`form-input ${error ? 'error' : ''}`}
+                    className={`form-input ${errors.email ? 'error' : ''}`}
                   />
                   <div className="input-icon">✉️</div>
                 </div>
+                {errors.email && <span className="form-error">{errors.email}</span>}
               </div>
 
               {/* Password field */}
               <div className="form-group">
-                <div className="password-label-row">
-                  <label htmlFor="password" className="form-label">Password</label>
-                  <Link href="#" className="forgot-password">Forgot?</Link>
-                </div>
+                <label htmlFor="password" className="form-label">Password</label>
                 <div className="form-input-wrapper">
                   <input
                     id="password"
                     type="password"
                     placeholder="••••••••"
-                    required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className={`form-input ${error ? 'error' : ''}`}
+                    className={`form-input ${errors.password ? 'error' : ''}`}
                   />
                   <div className="input-icon">🔐</div>
                 </div>
+                {errors.password && <span className="form-error">{errors.password}</span>}
               </div>
 
-              {/* Error message */}
-              {error && (
-                <div className="form-status error">
-                  {error}
+              {/* Confirm password field */}
+              <div className="form-group">
+                <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+                <div className="form-input-wrapper">
+                  <input
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="••••••••"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className={`form-input ${errors.confirmPassword ? 'error' : ''}`}
+                  />
+                  <div className="input-icon">🔒</div>
                 </div>
-              )}
+                {errors.confirmPassword && <span className="form-error">{errors.confirmPassword}</span>}
+              </div>
 
               {/* Status message */}
-              {status && (
-                <div className="form-status info">
+              {status && !loading && (
+                <div className={`form-status ${Object.keys(errors).length > 0 ? 'error' : 'info'}`}>
                   {status}
                 </div>
               )}
@@ -121,16 +177,16 @@ export default function LoginPage() {
                 {loading ? (
                   <>
                     <span className="spinner"></span>
-                    Signing in...
+                    Creating account...
                   </>
                 ) : (
-                  'Sign In'
+                  'Create Account'
                 )}
               </button>
 
-              {/* Register link */}
+              {/* Login link */}
               <div className="form-footer">
-                <p>Don't have an account? <Link href="/register" className="auth-link">Create one</Link></p>
+                <p>Already have an account? <Link href="/login" className="auth-link">Sign in</Link></p>
               </div>
             </form>
           </div>
@@ -152,7 +208,7 @@ export default function LoginPage() {
         .auth-wrapper {
           position: relative;
           width: 100%;
-          max-width: 420px;
+          max-width: 450px;
         }
 
         .auth-bg-blur {
@@ -243,31 +299,12 @@ export default function LoginPage() {
           gap: 8px;
         }
 
-        .password-label-row {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
         .form-label {
           color: #cbd5e1;
           font-size: 13px;
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.5px;
-        }
-
-        .forgot-password {
-          color: #22c55e;
-          font-size: 12px;
-          text-decoration: none;
-          font-weight: 500;
-          transition: all 0.3s ease;
-        }
-
-        .forgot-password:hover {
-          color: #86efac;
-          text-decoration: underline;
         }
 
         .form-input-wrapper {
@@ -313,6 +350,12 @@ export default function LoginPage() {
           left: 12px;
           font-size: 16px;
           pointer-events: none;
+        }
+
+        .form-error {
+          color: #ef4444;
+          font-size: 12px;
+          font-weight: 500;
         }
 
         .form-status {
