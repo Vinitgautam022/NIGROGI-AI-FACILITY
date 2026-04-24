@@ -11,7 +11,9 @@ export async function POST(request: Request) {
       sex: String(body.sex ?? ''),
       duration: String(body.duration ?? ''),
       symptoms: String(body.symptoms ?? ''),
-      severity: String(body.severity ?? '')
+      severity: String(body.severity ?? ''),
+      preferredLanguage: String(body.preferredLanguage ?? 'auto'),
+      doctorPreference: String(body.doctorPreference ?? 'General Physician')
     });
     return NextResponse.json(result);
   } catch {

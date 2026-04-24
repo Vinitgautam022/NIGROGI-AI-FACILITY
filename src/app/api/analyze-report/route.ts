@@ -8,7 +8,9 @@ export async function POST(request: Request) {
     const body = (await request.json()) as Record<string, unknown>;
     const result = await analyzeReportSmart({
       reportTitle: String(body.reportTitle ?? ''),
-      reportText: String(body.reportText ?? '')
+      reportText: String(body.reportText ?? ''),
+      preferredLanguage: String(body.preferredLanguage ?? 'auto'),
+      doctorPreference: String(body.doctorPreference ?? 'General Physician')
     });
     return NextResponse.json(result);
   } catch {
