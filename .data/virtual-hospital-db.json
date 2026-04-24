@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": "be703550-3070-49ff-bce1-bc82caf4022a",
+      "name": "tanmay sharm a",
+      "email": "vinitgautam022@gmail.com",
+      "passwordHash": "$2b$10$Oxn4JrLJ5dLWqhFQPGbRUOxoMlhRe25nTKMIw7VF/YyWqMZU4w5S6",
+      "createdAt": "2026-04-24T05:31:31.940Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "ad242d7a-2e56-4624-b200-27cc03dde14e",
+      "userId": "be703550-3070-49ff-bce1-bc82caf4022a",
+      "token": "9ed26898-fdd6-4618-b62f-e937b46dffa8",
+      "createdAt": "2026-04-24T05:31:31.947Z"
+    }
+  ]
+}

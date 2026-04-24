@@ -4,15 +4,12 @@ import { getCurrentUserFromCookies } from '@/lib/auth';
 export async function GET() {
   const user = await getCurrentUserFromCookies();
   if (!user) {
-    return NextResponse.json({ authenticated: false }, { status: 401 });
+    return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
   }
 
   return NextResponse.json({
-    authenticated: true,
-    user: {
-      id: user.id,
-      name: user.name,
-      email: user.email
-    }
+    id: user.id,
+    name: user.name,
+    email: user.email
   });
 }
