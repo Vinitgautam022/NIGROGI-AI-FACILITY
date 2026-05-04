@@ -12,16 +12,16 @@ type RequestBody = {
     symptoms?: string;
     severity?: string;
     preferredLanguage?: string;
-    doctorPreference?: string;
+    preferredCity?: string;
   };
   report?: {
     reportTitle?: string;
     reportText?: string;
     preferredLanguage?: string;
-    doctorPreference?: string;
+    preferredCity?: string;
   };
   preferredLanguage?: string;
-  doctorPreference?: string;
+  preferredCity?: string;
   symptomAnalysis?: AnalysisResult;
   reportAnalysis?: AnalysisResult;
 };
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
         symptoms: String(symptomInput.symptoms ?? ''),
         severity: String(symptomInput.severity ?? ''),
         preferredLanguage: String(body.preferredLanguage ?? symptomInput.preferredLanguage ?? 'auto'),
-        doctorPreference: String(body.doctorPreference ?? symptomInput.doctorPreference ?? 'General Physician')
+        preferredCity: String(body.preferredCity ?? symptomInput.preferredCity ?? '')
       }));
 
     const reportAnalysis =
@@ -50,14 +50,13 @@ export async function POST(request: Request) {
         reportTitle: String(reportInput.reportTitle ?? ''),
         reportText: String(reportInput.reportText ?? ''),
         preferredLanguage: String(body.preferredLanguage ?? reportInput.preferredLanguage ?? 'auto'),
-        doctorPreference: String(body.doctorPreference ?? reportInput.doctorPreference ?? 'General Physician')
+        preferredCity: String(body.preferredCity ?? reportInput.preferredCity ?? '')
       }));
     const noteBundle = await generateClinicalNoteSmart(
       symptomAnalysis,
       reportAnalysis,
       body.patientLabel ?? 'Anonymous patient',
-      String(body.preferredLanguage ?? 'auto'),
-      String(body.doctorPreference ?? 'General Physician')
+      String(body.preferredLanguage ?? 'auto')
     );
 
     return NextResponse.json({ ...noteBundle, symptomAnalysis, reportAnalysis });

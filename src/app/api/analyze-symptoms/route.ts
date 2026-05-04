@@ -13,7 +13,7 @@ export async function POST(request: Request) {
       symptoms: String(body.symptoms ?? ''),
       severity: String(body.severity ?? ''),
       preferredLanguage: String(body.preferredLanguage ?? 'auto'),
-      doctorPreference: String(body.doctorPreference ?? 'General Physician')
+      preferredCity: String(body.preferredCity ?? '')
     });
     return NextResponse.json(result);
   } catch {

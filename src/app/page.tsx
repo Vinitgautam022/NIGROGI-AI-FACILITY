@@ -26,7 +26,7 @@ export default function HomePage() {
 
         <article className="hero-visual card-3d">
           <img
-            src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=1200&q=80"
+            src="https://images.unsplash.com/photo-1631217b9201-d5ffd5d36d0f?auto=format&fit=crop&w=1200&q=80"
             alt="Modern healthcare dashboard"
           />
           <div className="visual-overlay">

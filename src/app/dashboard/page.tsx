@@ -120,19 +120,43 @@ export default function DashboardPage() {
               <span className="tool-arrow">→</span>
             </Link>
 
-            {/* Clinical Note Generator */}
-            <Link href="/tools/note-generator" className="tool-card">
-              <div className="tool-icon">📋</div>
-              <h4>Clinical Notes</h4>
-              <p>Generate comprehensive clinical notes and export as PDF for your records.</p>
-              <span className="tool-arrow">→</span>
-            </Link>
-
             {/* Doctor Finder */}
             <Link href="/tools/doctor-finder" className="tool-card">
               <div className="tool-icon">👨‍⚕️</div>
               <h4>Doctor Finder</h4>
               <p>Find doctors based on specialty, location, and availability in your area.</p>
+              <span className="tool-arrow">→</span>
+            </Link>
+
+            {/* Appointments */}
+            <Link href="/tools/appointments" className="tool-card">
+              <div className="tool-icon">📅</div>
+              <h4>Book Appointments</h4>
+              <p>Schedule and manage your doctor appointments with ease and get reminders.</p>
+              <span className="tool-arrow">→</span>
+            </Link>
+
+            {/* Medical Records */}
+            <Link href="/tools/medical-records" className="tool-card">
+              <div className="tool-icon">📋</div>
+              <h4>Medical Records</h4>
+              <p>Access your complete medical history, lab reports, and past treatments.</p>
+              <span className="tool-arrow">→</span>
+            </Link>
+
+            {/* Prescriptions */}
+            <Link href="/tools/prescriptions" className="tool-card">
+              <div className="tool-icon">💊</div>
+              <h4>Prescriptions</h4>
+              <p>View active prescriptions, refill medicines, and track medication schedules.</p>
+              <span className="tool-arrow">→</span>
+            </Link>
+
+            {/* Health Dashboard */}
+            <Link href="/tools/health-dashboard" className="tool-card">
+              <div className="tool-icon">📊</div>
+              <h4>Health Dashboard</h4>
+              <p>Monitor vital signs, health metrics, and track your wellness progress daily.</p>
               <span className="tool-arrow">→</span>
             </Link>
           </div>
@@ -161,8 +185,37 @@ export default function DashboardPage() {
       <style jsx>{`
         .dashboard-container {
           min-height: 100vh;
-          background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-          color: #e2e8f0;
+          background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 25%, #f5f3ff 50%, #f0f9ff 75%, #ffffff 100%);
+          color: #0f172a;
+          position: relative;
+          overflow-x: hidden;
+        }
+
+        /* Animated background orbs */
+        .dashboard-container::before {
+          content: '';
+          position: fixed;
+          top: -50%;
+          right: -10%;
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.08), transparent);
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .dashboard-container::after {
+          content: '';
+          position: fixed;
+          bottom: -30%;
+          left: -5%;
+          width: 500px;
+          height: 500px;
+          background: radial-gradient(circle, rgba(22, 163, 74, 0.06), transparent);
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 0;
         }
 
         .loading-spinner {
@@ -172,15 +225,18 @@ export default function DashboardPage() {
           justify-content: center;
           min-height: 100vh;
           gap: 20px;
+          position: relative;
+          z-index: 1;
         }
 
         .spinner {
-          width: 40px;
-          height: 40px;
-          border: 3px solid rgba(34, 197, 94, 0.3);
-          border-top-color: #22c55e;
+          width: 50px;
+          height: 50px;
+          border: 4px solid rgba(22, 163, 74, 0.2);
+          border-top-color: #16a34a;
+          border-right-color: #22c55e;
           border-radius: 50%;
-          animation: spin 0.8s linear infinite;
+          animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
@@ -195,232 +251,369 @@ export default function DashboardPage() {
           min-height: 100vh;
           gap: 20px;
           padding: 20px;
+          position: relative;
+          z-index: 1;
         }
 
         .error-card p {
-          color: #fca5a5;
+          color: #dc2626;
           font-size: 16px;
         }
 
-        /* Header */
+        /* ===== HEADER SECTION ===== */
         .dashboard-header {
-          background: rgba(15, 23, 42, 0.8);
-          backdrop-filter: blur(10px);
-          border-bottom: 1px solid rgba(34, 197, 94, 0.2);
-          padding: 20px 0;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 249, 255, 0.95) 100%);
+          backdrop-filter: blur(20px);
+          border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+          padding: 24px 0;
           position: sticky;
           top: 0;
           z-index: 100;
+          box-shadow: 0 4px 16px rgba(59, 130, 246, 0.08);
         }
 
         .header-content {
-          max-width: 1200px;
+          max-width: 1400px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 24px;
           display: flex;
           justify-content: space-between;
           align-items: center;
+          gap: 30px;
         }
 
         .logo-section {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 12px;
         }
 
         .logo {
-          font-size: 24px;
-          font-weight: 700;
-          background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+          font-size: 28px;
+          font-weight: 800;
+          background: linear-gradient(135deg, #16a34a 0%, #0891b2 50%, #0066cc 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
           margin: 0;
+          letter-spacing: -0.5px;
         }
 
         .header-actions {
           display: flex;
           align-items: center;
-          gap: 20px;
+          gap: 24px;
         }
 
         .user-info {
-          color: #cbd5e1;
+          color: #475569;
           font-size: 14px;
+          font-weight: 500;
         }
 
         .user-info strong {
-          color: #22c55e;
-          font-weight: 600;
+          color: #16a34a;
+          font-weight: 700;
+          display: block;
+          margin-top: 4px;
         }
 
         .btn-logout {
           padding: 10px 20px;
-          background: transparent;
-          border: 1.5px solid rgba(239, 68, 68, 0.5);
-          color: #ef4444;
+          background: linear-gradient(135deg, rgba(220, 38, 38, 0.08), rgba(220, 38, 38, 0.05));
+          border: 1.5px solid rgba(220, 38, 38, 0.4);
+          color: #dc2626;
           border-radius: 8px;
           font-size: 13px;
-          font-weight: 600;
+          font-weight: 700;
           cursor: pointer;
           transition: all 0.3s ease;
         }
 
         .btn-logout:hover {
-          background: rgba(239, 68, 68, 0.1);
-          border-color: #ef4444;
-          color: #fca5a5;
+          background: rgba(220, 38, 38, 0.12);
+          border-color: #dc2626;
+          color: #991b1b;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
         }
 
-        /* Main content */
+        /* ===== MAIN CONTENT ===== */
         .dashboard-main {
-          max-width: 1200px;
+          max-width: 1400px;
           margin: 0 auto;
-          padding: 40px 20px;
+          padding: 50px 24px;
+          position: relative;
+          z-index: 1;
         }
 
-        /* Welcome section */
+        /* ===== WELCOME SECTION ===== */
         .welcome-section {
-          margin-bottom: 50px;
+          margin-bottom: 60px;
         }
 
         .welcome-card {
-          background: rgba(34, 197, 94, 0.05);
-          border: 1px solid rgba(34, 197, 94, 0.3);
-          border-radius: 16px;
-          padding: 30px;
+          background: linear-gradient(135deg, rgba(22, 163, 74, 0.08) 0%, rgba(8, 145, 178, 0.06) 100%);
+          border: 2px solid rgba(59, 130, 246, 0.3);
+          border-radius: 20px;
+          padding: 50px 40px;
           text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .welcome-card::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          right: -10%;
+          width: 300px;
+          height: 300px;
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.1), transparent);
+          border-radius: 50%;
+          pointer-events: none;
         }
 
         .welcome-card h2 {
-          font-size: 28px;
-          background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+          font-size: 36px;
+          font-weight: 800;
+          background: linear-gradient(135deg, #16a34a 0%, #0891b2 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          margin: 0 0 12px 0;
+          margin: 0 0 16px 0;
+          position: relative;
+          z-index: 1;
         }
 
         .welcome-subtitle {
-          color: #cbd5e1;
-          font-size: 15px;
+          color: #475569;
+          font-size: 16px;
           margin: 0;
+          position: relative;
+          z-index: 1;
+          line-height: 1.6;
         }
 
-        /* Tools section */
+        /* ===== TOOLS SECTION ===== */
         .tools-section {
-          margin-bottom: 50px;
+          margin-bottom: 70px;
+          padding: 40px;
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(8, 145, 178, 0.03) 100%);
+          border: 1.5px solid rgba(59, 130, 246, 0.2);
+          border-radius: 20px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .tools-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
         }
 
         .section-title {
-          font-size: 20px;
-          font-weight: 700;
-          color: #cbd5e1;
-          margin: 0 0 24px 0;
+          font-size: 22px;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0 0 32px 0;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
+          letter-spacing: 1.5px;
+          position: relative;
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .section-title::before {
+          content: '';
+          width: 4px;
+          height: 24px;
+          background: linear-gradient(135deg, #16a34a, #0891b2);
+          border-radius: 2px;
         }
 
         .tools-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 20px;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 28px;
+          position: relative;
+          z-index: 1;
         }
 
         .tool-card {
           position: relative;
-          background: rgba(30, 41, 59, 0.5);
-          border: 1.5px solid rgba(34, 197, 94, 0.3);
-          border-radius: 12px;
-          padding: 24px;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 249, 255, 0.8) 100%);
+          border: 2px solid rgba(59, 130, 246, 0.25);
+          border-radius: 16px;
+          padding: 32px;
           text-decoration: none;
           color: inherit;
-          transition: all 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 16px;
           cursor: pointer;
+          overflow: hidden;
+          box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+        }
+
+        .tool-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: linear-gradient(90deg, #16a34a, #0891b2, transparent);
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.3s ease;
+        }
+
+        .tool-card:hover::before {
+          transform: scaleX(1);
         }
 
         .tool-card:hover {
-          background: rgba(30, 41, 59, 0.8);
-          border-color: #22c55e;
-          transform: translateY(-4px);
-          box-shadow: 0 20px 40px rgba(34, 197, 94, 0.15);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(224, 242, 254, 0.9) 100%);
+          border-color: #0891b2;
+          transform: translateY(-8px);
+          box-shadow: 0 20px 48px rgba(59, 130, 246, 0.25);
         }
 
         .tool-icon {
-          font-size: 40px;
-          height: 60px;
+          font-size: 48px;
+          height: 70px;
           display: flex;
           align-items: center;
+          filter: drop-shadow(0 2px 4px rgba(22, 163, 74, 0.15));
         }
 
         .tool-card h4 {
-          font-size: 16px;
-          font-weight: 700;
-          color: #e2e8f0;
+          font-size: 18px;
+          font-weight: 800;
+          color: #0f172a;
           margin: 0;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
         }
 
         .tool-card p {
-          font-size: 13px;
-          color: #94a3b8;
+          font-size: 14px;
+          color: #475569;
           margin: 0;
           flex: 1;
+          line-height: 1.5;
         }
 
         .tool-arrow {
-          color: #22c55e;
-          font-size: 20px;
+          color: #16a34a;
+          font-size: 24px;
           transition: all 0.3s ease;
+          font-weight: 700;
         }
 
         .tool-card:hover .tool-arrow {
-          transform: translateX(4px);
+          transform: translateX(8px);
         }
 
-        /* Stats section */
+        /* ===== STATS SECTION ===== */
         .stats-section {
-          margin-bottom: 30px;
+          margin-bottom: 40px;
+          padding: 40px;
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(8, 145, 178, 0.03) 100%);
+          border: 1.5px solid rgba(59, 130, 246, 0.2);
+          border-radius: 20px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .stats-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
         }
 
         .stats-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 20px;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 24px;
+          position: relative;
+          z-index: 1;
         }
 
         .stat-card {
-          background: rgba(30, 41, 59, 0.5);
-          border: 1.5px solid rgba(34, 197, 94, 0.2);
-          border-radius: 12px;
-          padding: 20px;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 249, 255, 0.8) 100%);
+          border: 1.5px solid rgba(59, 130, 246, 0.2);
+          border-radius: 14px;
+          padding: 28px;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s ease;
+          box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+        }
+
+        .stat-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: -100px;
+          width: 200px;
+          height: 200px;
+          background: radial-gradient(circle, rgba(22, 163, 74, 0.1), transparent);
+          border-radius: 50%;
+          transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+          border-color: #0891b2;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(224, 242, 254, 0.9) 100%);
+          transform: translateY(-4px);
+          box-shadow: 0 12px 32px rgba(59, 130, 246, 0.15);
+        }
+
+        .stat-card:hover::before {
+          right: -50px;
         }
 
         .stat-label {
-          font-size: 12px;
-          color: #94a3b8;
+          font-size: 11px;
+          color: #64748b;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
-          margin-bottom: 8px;
+          letter-spacing: 1px;
+          margin-bottom: 12px;
+          font-weight: 700;
+          position: relative;
+          z-index: 1;
         }
 
         .stat-value {
-          font-size: 18px;
-          font-weight: 700;
-          color: #cbd5e1;
+          font-size: 20px;
+          font-weight: 800;
+          color: #16a34a;
           word-break: break-all;
+          position: relative;
+          z-index: 1;
         }
 
         .btn-secondary {
           padding: 10px 20px;
-          background: transparent;
-          border: 1.5px solid rgba(34, 197, 94, 0.5);
-          color: #22c55e;
+          background: linear-gradient(135deg, rgba(22, 163, 74, 0.08), rgba(22, 163, 74, 0.05));
+          border: 1.5px solid rgba(22, 163, 74, 0.4);
+          color: #16a34a;
           border-radius: 8px;
           font-size: 13px;
-          font-weight: 600;
+          font-weight: 700;
           cursor: pointer;
           text-decoration: none;
           transition: all 0.3s ease;
@@ -428,16 +621,35 @@ export default function DashboardPage() {
         }
 
         .btn-secondary:hover {
-          background: rgba(34, 197, 94, 0.1);
-          border-color: #22c55e;
-          color: #86efac;
+          background: rgba(22, 163, 74, 0.15);
+          border-color: #16a34a;
+          color: #15803d;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(22, 163, 74, 0.15);
         }
 
-        /* Responsive */
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+          .dashboard-main {
+            padding: 40px 16px;
+          }
+
+          .tools-section,
+          .stats-section {
+            padding: 32px;
+          }
+
+          .tools-grid {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+          }
+        }
+
         @media (max-width: 768px) {
           .header-content {
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
+            align-items: flex-start;
           }
 
           .header-actions {
@@ -445,16 +657,70 @@ export default function DashboardPage() {
             justify-content: space-between;
           }
 
+          .logo {
+            font-size: 22px;
+          }
+
           .dashboard-main {
-            padding: 20px;
+            padding: 30px 16px;
+          }
+
+          .welcome-section {
+            margin-bottom: 40px;
+          }
+
+          .welcome-card {
+            padding: 32px 20px;
+          }
+
+          .welcome-card h2 {
+            font-size: 24px;
+          }
+
+          .welcome-subtitle {
+            font-size: 14px;
+          }
+
+          .tools-section,
+          .stats-section {
+            padding: 24px;
+            margin-bottom: 40px;
+          }
+
+          .section-title {
+            font-size: 18px;
+            margin-bottom: 24px;
           }
 
           .tools-grid {
             grid-template-columns: 1fr;
+            gap: 16px;
+          }
+
+          .tool-card {
+            padding: 24px;
+          }
+
+          .tool-icon {
+            font-size: 40px;
+            height: 50px;
+          }
+
+          .tool-card h4 {
+            font-size: 16px;
+          }
+
+          .tool-card p {
+            font-size: 13px;
           }
 
           .stats-grid {
             grid-template-columns: 1fr;
+            gap: 16px;
+          }
+
+          .stat-card {
+            padding: 20px;
           }
 
           .welcome-card {

@@ -15,6 +15,7 @@ interface Doctor {
 }
 
 const DOCTORS_DIRECTORY: Doctor[] = [
+  // Delhi
   {
     id: '1',
     name: 'Dr. Rajesh Kumar',
@@ -24,16 +25,6 @@ const DOCTORS_DIRECTORY: Doctor[] = [
     rating: 4.8,
     experience: 15,
     phone: '+91-98765-43210'
-  },
-  {
-    id: '2',
-    name: 'Dr. Priya Singh',
-    specialist: 'Cardiologist',
-    city: 'Mumbai',
-    availability: 'tomorrow',
-    rating: 4.9,
-    experience: 12,
-    phone: '+91-98765-43211'
   },
   {
     id: '3',
@@ -46,6 +37,68 @@ const DOCTORS_DIRECTORY: Doctor[] = [
     phone: '+91-98765-43212'
   },
   {
+    id: '6',
+    name: 'Dr. Neha Gupta',
+    specialist: 'Pediatrician',
+    city: 'Delhi',
+    availability: 'week',
+    rating: 4.9,
+    experience: 14,
+    phone: '+91-98765-43215'
+  },
+  {
+    id: '7',
+    name: 'Dr. Sanjay Malhotra',
+    specialist: 'Cardiologist',
+    city: 'Delhi',
+    availability: 'today',
+    rating: 4.8,
+    experience: 16,
+    phone: '+91-98765-43216'
+  },
+  {
+    id: '8',
+    name: 'Dr. Anjali Verma',
+    specialist: 'Gastroenterologist',
+    city: 'Delhi',
+    availability: 'tomorrow',
+    rating: 4.7,
+    experience: 11,
+    phone: '+91-98765-43217'
+  },
+  // Mumbai
+  {
+    id: '2',
+    name: 'Dr. Priya Singh',
+    specialist: 'Cardiologist',
+    city: 'Mumbai',
+    availability: 'tomorrow',
+    rating: 4.9,
+    experience: 12,
+    phone: '+91-98765-43211'
+  },
+  {
+    id: '9',
+    name: 'Dr. Vikram Deshmukh',
+    specialist: 'Orthopedist',
+    city: 'Mumbai',
+    availability: 'today',
+    rating: 4.6,
+    experience: 9,
+    phone: '+91-98765-43218'
+  },
+  {
+    id: '10',
+    name: 'Dr. Riya Menon',
+    specialist: 'Psychiatrist',
+    city: 'Mumbai',
+    availability: 'week',
+    rating: 4.8,
+    experience: 8,
+    phone: '+91-98765-43219'
+  },
+  // Bangalore
+  {
     id: '4',
     name: 'Dr. Sarah Khan',
     specialist: 'Dermatologist',
@@ -55,6 +108,27 @@ const DOCTORS_DIRECTORY: Doctor[] = [
     experience: 8,
     phone: '+91-98765-43213'
   },
+  {
+    id: '11',
+    name: 'Dr. Madhav Kumar',
+    specialist: 'Ophthalmologist',
+    city: 'Bangalore',
+    availability: 'tomorrow',
+    rating: 4.7,
+    experience: 13,
+    phone: '+91-98765-43220'
+  },
+  {
+    id: '12',
+    name: 'Dr. Pooja Nair',
+    specialist: 'General Physician',
+    city: 'Bangalore',
+    availability: 'today',
+    rating: 4.8,
+    experience: 10,
+    phone: '+91-98765-43221'
+  },
+  // Hyderabad
   {
     id: '5',
     name: 'Dr. Vivek Sharma',
@@ -66,14 +140,87 @@ const DOCTORS_DIRECTORY: Doctor[] = [
     phone: '+91-98765-43214'
   },
   {
-    id: '6',
-    name: 'Dr. Neha Gupta',
-    specialist: 'Pediatrician',
-    city: 'Delhi',
+    id: '13',
+    name: 'Dr. Ramesh Reddy',
+    specialist: 'Pulmonologist',
+    city: 'Hyderabad',
+    availability: 'today',
+    rating: 4.7,
+    experience: 14,
+    phone: '+91-98765-43222'
+  },
+  {
+    id: '14',
+    name: 'Dr. Swati Mishra',
+    specialist: 'Oncologist',
+    city: 'Hyderabad',
     availability: 'week',
     rating: 4.9,
-    experience: 14,
-    phone: '+91-98765-43215'
+    experience: 12,
+    phone: '+91-98765-43223'
+  },
+  // Kolkata
+  {
+    id: '15',
+    name: 'Dr. Arun Roy',
+    specialist: 'Cardiologist',
+    city: 'Kolkata',
+    availability: 'today',
+    rating: 4.6,
+    experience: 11,
+    phone: '+91-98765-43224'
+  },
+  {
+    id: '16',
+    name: 'Dr. Suparna Chatterjee',
+    specialist: 'Gynecologist',
+    city: 'Kolkata',
+    availability: 'tomorrow',
+    rating: 4.8,
+    experience: 13,
+    phone: '+91-98765-43225'
+  },
+  // Pune
+  {
+    id: '17',
+    name: 'Dr. Sameer Joshi',
+    specialist: 'Neurologist',
+    city: 'Pune',
+    availability: 'week',
+    rating: 4.7,
+    experience: 10,
+    phone: '+91-98765-43226'
+  },
+  {
+    id: '18',
+    name: 'Dr. Divya Kulkarni',
+    specialist: 'Dentist',
+    city: 'Pune',
+    availability: 'today',
+    rating: 4.8,
+    experience: 7,
+    phone: '+91-98765-43227'
+  },
+  // Gurgaon
+  {
+    id: '19',
+    name: 'Dr. Nitin Garg',
+    specialist: 'Urology Specialist',
+    city: 'Gurgaon',
+    availability: 'tomorrow',
+    rating: 4.7,
+    experience: 12,
+    phone: '+91-98765-43228'
+  },
+  {
+    id: '20',
+    name: 'Dr. Meera Bansal',
+    specialist: 'General Physician',
+    city: 'Gurgaon',
+    availability: 'today',
+    rating: 4.9,
+    experience: 9,
+    phone: '+91-98765-43229'
   }
 ];
 
@@ -262,18 +409,18 @@ export default function DoctorFinderPage() {
       <style jsx>{`
         .tool-page {
           min-height: 100vh;
-          background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-          color: #e2e8f0;
+          background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 25%, #f5f3ff 50%, #f0f9ff 75%, #ffffff 100%);
+          padding-bottom: 40px;
         }
 
         .tool-header {
-          background: rgba(15, 23, 42, 0.8);
-          backdrop-filter: blur(10px);
-          border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 249, 255, 0.95) 100%);
+          border-bottom: 2px solid rgba(59, 130, 246, 0.2);
           padding: 30px 0;
           position: sticky;
           top: 0;
           z-index: 100;
+          box-shadow: 0 4px 16px rgba(59, 130, 246, 0.08);
         }
 
         .tool-header-content {
@@ -283,32 +430,43 @@ export default function DoctorFinderPage() {
         }
 
         .back-link {
-          color: #22c55e;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          background: rgba(22, 163, 74, 0.1);
+          border: 1.5px solid rgba(22, 163, 74, 0.4);
+          border-radius: 8px;
+          color: #16a34a;
           text-decoration: none;
-          font-size: 13px;
+          font-size: 0.95rem;
           font-weight: 600;
-          margin-bottom: 10px;
-          display: inline-block;
           transition: all 0.3s ease;
+          cursor: pointer;
+          margin-bottom: 16px;
         }
 
         .back-link:hover {
-          color: #86efac;
+          background: rgba(22, 163, 74, 0.2);
+          border-color: #16a34a;
+          transform: translateX(-4px);
         }
 
         .tool-header h1 {
           font-size: 32px;
-          margin: 10px 0 8px;
-          background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+          font-weight: 800;
+          color: #0f172a;
+          margin: 12px 0 8px 0;
+          background: linear-gradient(135deg, #16a34a, #0891b2);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
 
         .tool-header p {
-          color: #cbd5e1;
+          color: #475569;
           margin: 0;
-          font-size: 15px;
+          font-size: 16px;
         }
 
         .tool-main {
@@ -318,10 +476,11 @@ export default function DoctorFinderPage() {
         }
 
         .tool-container {
-          background: rgba(30, 41, 59, 0.5);
-          border: 1px solid rgba(34, 197, 94, 0.2);
+          background: white;
+          border: 1.5px solid rgba(59, 130, 246, 0.2);
           border-radius: 16px;
-          padding: 30px;
+          padding: 40px;
+          box-shadow: 0 4px 16px rgba(59, 130, 246, 0.08);
         }
 
         .search-form {
@@ -343,9 +502,9 @@ export default function DoctorFinderPage() {
         }
 
         .form-group label {
-          color: #cbd5e1;
+          color: #0f172a;
           font-size: 13px;
-          font-weight: 600;
+          font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.5px;
         }
@@ -353,10 +512,10 @@ export default function DoctorFinderPage() {
         .form-group input,
         .form-group select {
           padding: 12px;
-          background: rgba(15, 23, 42, 0.6);
-          border: 1.5px solid rgba(34, 197, 94, 0.3);
+          background: linear-gradient(135deg, rgba(240, 249, 255, 0.8), rgba(245, 243, 255, 0.8));
+          border: 1.5px solid rgba(59, 130, 246, 0.3);
           border-radius: 8px;
-          color: #e2e8f0;
+          color: #0f172a;
           font-family: inherit;
           font-size: 14px;
           transition: all 0.3s ease;
@@ -365,19 +524,19 @@ export default function DoctorFinderPage() {
 
         .form-group input:focus,
         .form-group select:focus {
-          background: rgba(15, 23, 42, 0.9);
-          border-color: #22c55e;
-          box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+          background: white;
+          border-color: #0891b2;
+          box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
         }
 
         .search-button {
           padding: 14px;
-          background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+          background: linear-gradient(135deg, #16a34a 0%, #0891b2 100%);
           color: white;
           border: none;
           border-radius: 8px;
           font-size: 15px;
-          font-weight: 600;
+          font-weight: 700;
           cursor: pointer;
           transition: all 0.3s ease;
           display: flex;
@@ -389,7 +548,7 @@ export default function DoctorFinderPage() {
 
         .search-button:hover:not(:disabled) {
           transform: translateY(-2px);
-          box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
+          box-shadow: 0 10px 20px rgba(22, 163, 74, 0.3);
         }
 
         .search-button:disabled {
@@ -424,24 +583,24 @@ export default function DoctorFinderPage() {
         .results-header h2 {
           margin: 0;
           font-size: 20px;
-          color: #e2e8f0;
+          color: #0f172a;
         }
 
         .clear-btn {
           padding: 8px 16px;
-          background: transparent;
-          border: 1.5px solid rgba(34, 197, 94, 0.5);
-          color: #22c55e;
+          background: rgba(22, 163, 74, 0.1);
+          border: 1.5px solid rgba(22, 163, 74, 0.4);
+          color: #16a34a;
           border-radius: 6px;
           font-size: 13px;
-          font-weight: 600;
+          font-weight: 700;
           cursor: pointer;
           transition: all 0.3s ease;
         }
 
         .clear-btn:hover {
-          background: rgba(34, 197, 94, 0.1);
-          border-color: #22c55e;
+          background: rgba(22, 163, 74, 0.2);
+          border-color: #16a34a;
         }
 
         .doctors-grid {
@@ -451,8 +610,8 @@ export default function DoctorFinderPage() {
         }
 
         .doctor-card {
-          background: rgba(15, 23, 42, 0.6);
-          border: 1.5px solid rgba(34, 197, 94, 0.2);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 249, 255, 0.8));
+          border: 1.5px solid rgba(59, 130, 246, 0.2);
           border-radius: 12px;
           padding: 20px;
           transition: all 0.3s ease;
@@ -462,10 +621,10 @@ export default function DoctorFinderPage() {
         }
 
         .doctor-card:hover {
-          border-color: #22c55e;
-          background: rgba(15, 23, 42, 0.9);
+          border-color: #0891b2;
+          background: white;
           transform: translateY(-4px);
-          box-shadow: 0 10px 30px rgba(34, 197, 94, 0.15);
+          box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
         }
 
         .doctor-header {
@@ -478,21 +637,22 @@ export default function DoctorFinderPage() {
         .doctor-header h3 {
           margin: 0 0 4px 0;
           font-size: 16px;
-          color: #e2e8f0;
+          color: #0f172a;
+          font-weight: 700;
         }
 
         .specialty {
           margin: 0;
-          color: #22c55e;
+          color: #16a34a;
           font-size: 13px;
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .rating {
           display: flex;
           align-items: center;
           gap: 4px;
-          background: rgba(34, 197, 94, 0.1);
+          background: rgba(22, 163, 74, 0.15);
           padding: 6px 10px;
           border-radius: 6px;
         }
@@ -502,7 +662,7 @@ export default function DoctorFinderPage() {
         }
 
         .rating-value {
-          color: #86efac;
+          color: #16a34a;
           font-weight: 700;
           font-size: 13px;
         }
@@ -511,8 +671,8 @@ export default function DoctorFinderPage() {
           display: flex;
           flex-direction: column;
           gap: 12px;
-          border-top: 1px solid rgba(34, 197, 94, 0.1);
-          border-bottom: 1px solid rgba(34, 197, 94, 0.1);
+          border-top: 1px solid rgba(59, 130, 246, 0.2);
+          border-bottom: 1px solid rgba(59, 130, 246, 0.2);
           padding: 12px 0;
         }
 
@@ -524,12 +684,12 @@ export default function DoctorFinderPage() {
         }
 
         .detail-item .label {
-          color: #94a3b8;
+          color: #64748b;
         }
 
         .detail-item .value {
-          color: #cbd5e1;
-          font-weight: 500;
+          color: #0f172a;
+          font-weight: 600;
         }
 
         .availability-badge {
@@ -537,7 +697,7 @@ export default function DoctorFinderPage() {
           padding: 4px 10px;
           border-radius: 6px;
           font-size: 12px;
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .doctor-actions {
@@ -563,26 +723,27 @@ export default function DoctorFinderPage() {
         }
 
         .call-btn {
-          background: rgba(59, 130, 246, 0.2);
-          color: #3b82f6;
-          border: 1.5px solid rgba(59, 130, 246, 0.5);
+          background: rgba(8, 145, 178, 0.15);
+          color: #0891b2;
+          border: 1.5px solid rgba(8, 145, 178, 0.3);
         }
 
         .call-btn:hover {
-          background: rgba(59, 130, 246, 0.3);
-          border-color: #3b82f6;
+          background: rgba(8, 145, 178, 0.25);
+          border-color: #0891b2;
           transform: translateY(-2px);
         }
 
         .book-btn {
-          background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+          background: linear-gradient(135deg, #16a34a 0%, #0891b2 100%);
           color: white;
           border: none;
+          font-weight: 700;
         }
 
         .book-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 0 6px 12px rgba(34, 197, 94, 0.3);
+          box-shadow: 0 6px 12px rgba(22, 163, 74, 0.3);
         }
 
         @media (max-width: 1024px) {

@@ -138,231 +138,47 @@ export default function LoginPage() {
       </div>
 
       <style jsx>{`
-        .auth-container {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 100vh;
-          padding: 20px;
-          background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .auth-wrapper {
-          position: relative;
-          width: 100%;
-          max-width: 420px;
-        }
-
-        .auth-bg-blur {
-          position: absolute;
-          top: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
-          border-radius: 50%;
-          animation: float 6s ease-in-out infinite;
-          pointer-events: none;
-        }
-
-        .auth-bg-gradient {
-          position: absolute;
-          top: 0;
-          right: -30%;
-          width: 150%;
-          height: 100%;
-          background: linear-gradient(45deg, rgba(16, 185, 129, 0.05) 0%, transparent 100%);
-          border-radius: 50%;
-          pointer-events: none;
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translate(0, 0); }
-          50% { transform: translate(30px, -30px); }
-        }
-
-        .auth-form-card {
-          position: relative;
-          z-index: 10;
-          background: rgba(15, 23, 42, 0.8);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(34, 197, 94, 0.2);
-          border-radius: 20px;
-          padding: 40px;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 1px rgba(34, 197, 94, 0.1);
-          animation: slideUp 0.6s ease-out;
-        }
-
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .auth-form-content {
-          position: relative;
-        }
-
-        .auth-form-header {
-          margin-bottom: 32px;
-          text-align: center;
-        }
-
-        .auth-form-header h1 {
-          font-size: 28px;
-          font-weight: 700;
-          background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          margin: 0 0 12px 0;
-        }
-
-        .auth-form-header p {
-          color: #94a3b8;
-          font-size: 14px;
-          margin: 0;
-        }
-
-        .auth-form {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-        }
-
-        .form-group {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
-
         .password-label-row {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
 
-        .form-label {
-          color: #cbd5e1;
-          font-size: 13px;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
-
         .forgot-password {
-          color: #22c55e;
-          font-size: 12px;
+          color: var(--accent);
+          font-size: 0.85rem;
           text-decoration: none;
-          font-weight: 500;
+          font-weight: 600;
           transition: all 0.3s ease;
         }
 
         .forgot-password:hover {
-          color: #86efac;
+          color: var(--accent2);
           text-decoration: underline;
         }
 
-        .form-input-wrapper {
-          position: relative;
-          display: flex;
-          align-items: center;
-        }
-
-        .form-input {
-          width: 100%;
-          padding: 12px 16px 12px 40px;
-          background: rgba(30, 41, 59, 0.5);
-          border: 1.5px solid rgba(34, 197, 94, 0.3);
-          border-radius: 10px;
-          color: #e2e8f0;
-          font-size: 14px;
-          font-family: inherit;
-          transition: all 0.3s ease;
-          outline: none;
-        }
-
-        .form-input:focus {
-          background: rgba(30, 41, 59, 0.8);
-          border-color: #22c55e;
-          box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
-        }
-
-        .form-input.error {
-          border-color: #ef4444;
-          background: rgba(239, 68, 68, 0.05);
-        }
-
-        .form-input.error:focus {
-          box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-        }
-
-        .form-input::placeholder {
-          color: #64748b;
-        }
-
-        .input-icon {
-          position: absolute;
-          left: 12px;
-          font-size: 16px;
-          pointer-events: none;
-        }
-
-        .form-status {
-          padding: 12px;
-          border-radius: 8px;
-          font-size: 13px;
+        .form-footer {
           text-align: center;
+          margin-top: 24px;
+          padding-top: 20px;
+          border-top: 1px solid var(--border);
         }
 
-        .form-status.info {
-          background: rgba(34, 197, 94, 0.1);
-          border: 1px solid rgba(34, 197, 94, 0.3);
-          color: #86efac;
+        .form-footer p {
+          color: var(--muted);
+          font-size: 0.9rem;
+          margin: 0;
         }
 
-        .form-status.error {
-          background: rgba(239, 68, 68, 0.1);
-          border: 1px solid rgba(239, 68, 68, 0.3);
-          color: #fca5a5;
+        .auth-link {
+          color: var(--accent);
+          text-decoration: none;
+          font-weight: 700;
+          transition: color 0.3s ease;
         }
 
-        .form-button {
-          padding: 14px 20px;
-          background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
-          color: #ffffff;
-          border: none;
-          border-radius: 10px;
-          font-size: 15px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          margin-top: 8px;
-        }
-
-        .form-button:hover:not(:disabled) {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
-        }
-
-        .form-button:active:not(:disabled) {
-          transform: translateY(0);
-        }
-
-        .form-button:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
+        .auth-link:hover {
+          color: var(--accent2);
         }
 
         .spinner {
@@ -376,29 +192,6 @@ export default function LoginPage() {
 
         @keyframes spin {
           to { transform: rotate(360deg); }
-        }
-
-        .form-footer {
-          text-align: center;
-          margin-top: 16px;
-        }
-
-        .form-footer p {
-          color: #94a3b8;
-          font-size: 13px;
-          margin: 0;
-        }
-
-        .auth-link {
-          color: #22c55e;
-          text-decoration: none;
-          font-weight: 600;
-          transition: all 0.3s ease;
-        }
-
-        .auth-link:hover {
-          color: #86efac;
-          text-decoration: underline;
         }
       `}</style>
     </div>
